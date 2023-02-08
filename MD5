@@ -1,0 +1,12 @@
+27e565893664dbde02f3384ada4a3fbe *DESCRIPTION
+2d5fca460ab64f34fed37af195da66da *NAMESPACE
+eefec8c0e23b2c9bd14ce003b7e91736 *R/IFMCDM.r
+20fad15e02cffbabaacd687069ea7fe4 *R/IFconversion.r
+f01682ffd9d5582c0d3b8a226f3c2b16 *build/partial.rdb
+4affb0d28e4750b6ad3ccc91b6622e55 *data/data_IF.rda
+bfaa13602129fce5d86c113586566437 *man/IFSM.Rd
+49b4b6c418a58610f070cf9ccbb23e0f *man/IFTOPSIS.Rd
+4e06d6b769ea83612a26e92db76febba *man/IFconversion.Rd
+d7695d04dba13ca80b3df0013060056d *man/data_IF.Rd
+faf3a6df03a7a4cf0ca60b1164fc96ee *tests/testthat.R
+023aaecc07c34a7b3fc94a80be71ff73 *tests/testthat/test_ifsm.R
