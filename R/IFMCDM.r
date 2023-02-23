@@ -82,6 +82,8 @@ IFTOPSIS<- function(data, #matrix with all the alternatives
 #' @keywords internal
 intuitionisticSyntheticMeasure<- function(data,d,w,z,p,ap,type)
 {
+  #on macos machines sometimes 0.5+0.5+0.0 isn't equal to 1
+  tollerance=0.000001
   if (!requireNamespace("dplyr", quietly = TRUE)) {
     stop(
       "Package \"dplyr\" must be installed to use this function.",
@@ -98,7 +100,7 @@ intuitionisticSyntheticMeasure<- function(data,d,w,z,p,ap,type)
     stop ("For intuitionistic data all values should be in range 0-1")
   }
   for(i in 1:(ncol(data)%/%3)){
-    if(any(apply(cbind(data[,3*i-2],data[,3*i-1],data[,3*i]),1,sum)!=1)){
+    if(any(abs(apply(cbind(data[,3*i-2],data[,3*i-1],data[,3*i]),1,sum)-1)>tollerance)){
       stop ("For intuitionistic fuzzy data mi,ni  and pi should sum to 1")
     }
   }
@@ -111,7 +113,7 @@ intuitionisticSyntheticMeasure<- function(data,d,w,z,p,ap,type)
   if(any(w>1)) {
     stop ("all weights in vector w should be in range 0-1")
   }
-  if(sum(w)!=1) {
+  if(abs(sum(w)-1)>tollerance) {
     stop ("the weights in vector w should sum to 1")
   }
   if(!d %in% c("euclidean","e","h","hamming")){
@@ -133,7 +135,7 @@ intuitionisticSyntheticMeasure<- function(data,d,w,z,p,ap,type)
       stop ("the ideal point parameter p should contain one of the following: \"dataBounds\", \"idealBounds\" or vector with ideal point coordinates ")
     }
     for(i in 1:(length(p)%/%3)){
-      if(p[,3*i-2]+p[,3*i-1]+p[,3*i]!=1){
+      if(abs(p[,3*i-2]+p[,3*i-1]+p[,3*i]-1)>tollerance){
         stop ("For ideal point  object each three mi,ni,pi, should sum to 1")
       }
     }
@@ -147,7 +149,7 @@ intuitionisticSyntheticMeasure<- function(data,d,w,z,p,ap,type)
       stop ("the anti ideal point parameter ap should contain one of the following: \"dataBounds\", \"idealBounds\" or vector with anti ideal point parameters ")
     }
     for(i in 1:(length(ap)%/%3)){
-      if(ap[,3*i-2]+ap[,3*i-1]+ap[,3*i]!=1){
+      if(abs(ap[,3*i-2]+ap[,3*i-1]+ap[,3*i]-1)>tollerance){
         stop ("For anti ideal point object each three mi,ni,pi, should sum to 1")
       }
     }
